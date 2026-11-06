@@ -121,7 +121,6 @@ namespace FightingWithNPCs
             npc.controller = null;
             npc.temporaryController = null;
             npc.ignoreScheduleToday = true;
-            npc.Schedule = null; // 1.6: clearSchedule() no longer exists; Schedule is a settable property
             npc.followSchedule = false;
             npc.Halt();
 
