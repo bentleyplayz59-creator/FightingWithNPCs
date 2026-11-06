@@ -1,0 +1,28 @@
+name: Build Stardew Valley Mod
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up SMAPI build environment
+        uses: Pathoschild/SMAPI-ModBuildWorkflow/add-build-environment@v1
+
+      - name: Build mod
+        run: dotnet build FightingWithNPCs.csproj --configuration Release
+
+      - name: Upload release artifacts
+        uses: Pathoschild/SMAPI-ModBuildWorkflow/upload-release-artifacts@v1
+        with:
+          path: _releases
+          create_attestations: false
